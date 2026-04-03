@@ -385,7 +385,55 @@ body {
   border-color: #38bdf8;
 }
 
+.editor-wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
 
+.autocomplete-dropdown {
+  position: fixed;
+  z-index: 1000;
+  background: #1e293b;
+  border: 1px solid #475569;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  max-height: 240px;
+  overflow-y: auto;
+  min-width: 240px;
+  max-width: 380px;
+  padding: 4px;
+}
+
+.autocomplete-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  gap: 12px;
+  transition: background 0.1s;
+}
+
+.autocomplete-item:hover,
+.autocomplete-item.selected {
+  background: #334155;
+}
+
+.autocomplete-label {
+  color: #38bdf8;
+  font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.autocomplete-detail {
+  color: #64748b;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
 
 .console-output {
   flex: 1;
