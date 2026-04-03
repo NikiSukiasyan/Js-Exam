@@ -1,5 +1,6 @@
 function Results({ studentName, scores, tasks, totalScore, onRestart }) {
-  const hasBonus = totalScore >= 90
+  const adjustment = totalScore < 85 ? -1 : totalScore >= 90 ? 2 : 0
+  const finalScore = Math.max(0, Math.min(100, totalScore + adjustment))
 
   return (
     <div className="results-container">
@@ -22,26 +23,37 @@ function Results({ studentName, scores, tasks, totalScore, onRestart }) {
 
         <div className="total-score-display">
           <span>ჯამური ქულა:</span>
-          <span className={`total-value ${totalScore >= 90 ? 'excellent' : totalScore >= 70 ? 'good' : 'bad'}`}>
+          <span className={`total-value ${finalScore >= 90 ? 'excellent' : finalScore >= 70 ? 'good' : 'bad'}`}>
             {totalScore}/100
+            {adjustment !== 0 && (
+              <span style={{ fontSize: '0.7em', marginLeft: '8px' }}>
+                ({adjustment > 0 ? '+' : ''}{adjustment} = {finalScore})
+              </span>
+            )}
           </span>
         </div>
 
-        {hasBonus && (
+        {finalScore >= 90 && (
           <div className="bonus-message">
-            🎉 გილოცავ! შენ მიიღე საჩუქრად <strong>5 ქულა</strong> საშინაო დავალებაში!
+            🎉 გილოცავ! შენ მიიღე საჩუქრად <strong>5 ქულა</strong> საშინაო დავალებაში! (+2 ბონუს ქულა)
           </div>
         )}
 
-        {totalScore >= 70 && totalScore < 90 && (
+        {finalScore >= 70 && finalScore < 90 && (
           <div className="result-message good-message">
             კარგი შედეგია! განაგრძე მუშაობა! 💪
           </div>
         )}
 
-        {totalScore < 70 && (
+        {finalScore < 70 && (
           <div className="result-message average-message">
             მეტი ვარჯიში გჭირდება. არ დანებდე! 📚
+          </div>
+        )}
+
+        {totalScore < 85 && (
+          <div className="result-message penalty-message">
+            ⚠️ 85-ზე ნაკლები ქულის გამო ჩამოგაკლდა 1 ქულა
           </div>
         )}
 

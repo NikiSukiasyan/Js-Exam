@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { checkAnswer, runCode } from './tasks'
 
-const TOTAL_TIME = 80 * 60
+const TOTAL_TIME = 70 * 60
 
 function Exam({ tasks, scores, setScores, onFinish }) {
   const [currentTask, setCurrentTask] = useState(0)
