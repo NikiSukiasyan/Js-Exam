@@ -18,10 +18,10 @@ function Login({ onStart }) {
         <p className="subtitle">შეიყვანე სახელი და დაიწყე ტესტი</p>
 
         <div className="info-box">
-          <p>დრო: <strong>1 საათი და 20 წუთი</strong></p>
+          <p>დრო: <strong>1 საათი და 10 წუთი</strong></p>
           <p>თასქების რაოდენობა: <strong>4</strong></p>
           <p>მაქსიმალური ქულა: <strong>100</strong></p>
-          <p>90+ ქულა = <strong>+5 ბონუს ქულა</strong></p>
+          <p>90+ ქულა = <strong>+2 ბონუს ქულა</strong></p>
         </div>
 
         <input

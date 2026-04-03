@@ -35,7 +35,7 @@ function Results({ studentName, scores, tasks, totalScore, onRestart }) {
 
         {finalScore >= 90 && (
           <div className="bonus-message">
-            🎉 გილოცავ! შენ მიიღე საჩუქრად <strong>5 ქულა</strong> საშინაო დავალებაში! (+2 ბონუს ქულა)
+            🎉 გილოცავ! შენ მიიღე საჩუქრად <strong>2 ქულა</strong> საშინაო დავალებაში! (+2 ბონუს ქულა)
           </div>
         )}
 
