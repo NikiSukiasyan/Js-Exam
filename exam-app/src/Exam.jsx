@@ -44,10 +44,10 @@ const JS_SNIPPETS = [
   { label: 'return', detail: 'return statement', code: 'return ' },
 ]
 
-function Exam({ tasks, scores, setScores, onFinish }) {
+function Exam({ tasks, scores, setScores, onFinish, initialAnswers, initialTimeLeft }) {
   const [currentTask, setCurrentTask] = useState(0)
-  const [answers, setAnswers] = useState(['', '', '', ''])
-  const [timeLeft, setTimeLeft] = useState(TOTAL_TIME)
+  const [answers, setAnswers] = useState(initialAnswers || ['', '', '', ''])
+  const [timeLeft, setTimeLeft] = useState(initialTimeLeft || TOTAL_TIME)
   const [checked, setChecked] = useState([false, false, false, false])
   const [consoleLogs, setConsoleLogs] = useState([])
   const [copied, setCopied] = useState(false)
@@ -169,6 +169,15 @@ function Exam({ tasks, scores, setScores, onFinish }) {
     }
   }
 
+  const saveSession = (newAnswers, newScores) => {
+    try {
+      const session = JSON.parse(localStorage.getItem('examSession') || '{}')
+      if (newAnswers) session.answers = newAnswers
+      if (newScores) session.scores = newScores
+      localStorage.setItem('examSession', JSON.stringify(session))
+    } catch {}
+  }
+
   useEffect(() => {
     timerRef.current = setInterval(() => {
       setTimeLeft((prev) => {
@@ -228,6 +237,7 @@ function Exam({ tasks, scores, setScores, onFinish }) {
     const newScores = [...scores]
     newScores[currentTask] = score
     setScores(newScores)
+    saveSession(null, newScores)
 
     const newChecked = [...checked]
     newChecked[currentTask] = true
@@ -334,6 +344,7 @@ function Exam({ tasks, scores, setScores, onFinish }) {
                   const newAnswers = [...answers]
                   newAnswers[currentTask] = e.target.value
                   setAnswers(newAnswers)
+                  saveSession(newAnswers, null)
                   if (checked[currentTask]) {
                     const newChecked = [...checked]
                     newChecked[currentTask] = false
